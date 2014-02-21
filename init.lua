@@ -39,7 +39,7 @@ local np_biome = {
 
 noise23 = {}
 
-waty = (80 * math.floor((WATY + 32) / 80)) - 32 + 15 -- sets water surface to 16 nodes above chunk base
+ywater = (80 * math.floor((YWATER + 32) / 80)) - 32 + 15 -- sets water surface to 16 nodes above chunk base
 
 -- Nodes
 
@@ -121,7 +121,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			local vi = area:index(x0, y, z)
 			for x = x0, x1 do -- for each node do
 				local si = x - x0 + 1
-				local grad = (TCEN - y) / GRAD
+				local grad = (TERCEN - y) / TERSCA
 				local density = nvals_terrain[nixyz] + grad
 				local n_biome = nvals_biome[nixz] -- biome noise for node
 				local biome = false -- set biome id to undefined
@@ -132,14 +132,14 @@ minetest.register_on_generated(function(minp, maxp, seed)
 				else
 					biome = 2
 				end
-				if density >= STOT then
+				if density >= TSTONE then
 					if biome == 3 then
 						data[vi] = c_n23destone
 					else -- biomes 1 and 2
 						data[vi] = c_n23stone
 					end
 					stable[si] = stable[si] + 1
-				elseif density >= 0 and density < STOT and stable[si] >= 2 then
+				elseif density >= 0 and density < TSTONE and stable[si] >= 2 then
 					if biome == 3 then
 						data[vi] = c_desand
 					elseif biome == 1 then
@@ -147,7 +147,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 					else -- biome = 2
 						data[vi] = c_sand
 					end
-				elseif y <= waty then
+				elseif y <= ywater then
 					data[vi] = c_water
 					stable[si] = 0
 				else
