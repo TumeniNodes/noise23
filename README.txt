@@ -1,6 +1,4 @@
-noise23 0.1.1 by paramat
-For latest stable Minetest back to 0.4.8
+noise23 0.2.0 by paramat
+For Minetest 0.4.11 and later
 Depends default
-Licenses: code WTFPL
-
-Enable fly, teleport to y = 7000 then fly up or down to find the surface.
+License: code WTFPL
